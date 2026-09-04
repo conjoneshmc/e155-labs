@@ -1,0 +1,4 @@
+set_io -nowarn fpga_blink_led 42
+set_io -nowarn fpga_blink_out 25
+set_io -nowarn mcu_echo_led 38
+set_io -nowarn -pullup yes -pullup_resistor 10K mcu_blink_in 23
