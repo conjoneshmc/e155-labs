@@ -6,11 +6,15 @@ module lab1_cj(
 );
 	// Internal high-speed oscillator
 	logic hf_osc_clk;
-	SB_HFOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(hf_osc_clk));
+	SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc (
+		.CLKHFPU(1'b1),
+		.CLKHFEN(1'b1),
+		.CLKHF(hf_osc_clk)
+	);
 
 	// Clock counter to divide frequency
 	logic led_clk;
-	clk_freq_divider #(.WIDTH(32), .MAXCOUNT(10000000)) ctr (
+	clk_freq_divider #(.WIDTH(32), .MAXCOUNT(5000000)) ctr (
 		.clk_in(hf_osc_clk),
 		.enable(1'b1),
 		.reset(!reset_bar),
