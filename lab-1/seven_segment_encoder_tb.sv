@@ -7,7 +7,7 @@ module seven_segment_encoder_tb();
 
   // We're testing combination logic, so we don't need a clock
   initial begin
-    $dumpvars(0, seven_segment_encoder_tb);
+    $dumpvars(0, digit, segments);
 
     digit = 0; #10;
     assert (segments == 7'b0000001)

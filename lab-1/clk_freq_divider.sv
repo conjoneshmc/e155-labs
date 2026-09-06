@@ -5,13 +5,14 @@ module clk_freq_divider #(parameter WIDTH = 16, MAXCOUNT = (1<<WIDTH) - 1) (
   output logic clk_out
 );
   logic [WIDTH-1:0] counter;
+
   always_ff @(posedge clk_in or posedge reset) begin
 		if (reset) begin
       counter <= 0;
       clk_out <= 0;
     end
     else if (enable) begin
-      if (counter < MAXCOUNT)
+      if (counter < MAXCOUNT - 1)
         counter <= counter + 1;
       else begin
         counter <= 0;

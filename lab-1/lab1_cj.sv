@@ -1,4 +1,5 @@
 module lab1_cj(
+	input logic reset_bar, // Push buttons on dev board are active LOW
 	input logic [3:0] switches,
 	output logic [2:0] leds,
 	output logic [6:0] seven_segment_leds
@@ -12,7 +13,7 @@ module lab1_cj(
 	clk_freq_divider #(.WIDTH(32), .MAXCOUNT(10000000)) ctr (
 		.clk_in(hf_osc_clk),
 		.enable(1'b1),
-		.reset(1'b0),
+		.reset(!reset_bar),
 		.clk_out(led_clk)
 	);
 
