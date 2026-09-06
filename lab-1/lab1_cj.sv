@@ -18,10 +18,13 @@ module lab1_cj(
 	);
 
 	// Combinational logic for switches
-	assign leds[0] = switches[1] ^ switches[0];
-	assign leds[1] = switches[3] & switches[2];
+	// NOTE: The switch pins are pulled HIGH when the switches are off, so we have
+	// to invert them in our code
+	assign leds[0] = (~switches[1]) ^ (~switches[0]);
+	assign leds[1] = (~switches[3]) & (~switches[2]);
 	assign leds[2] = led_clk;
 
 	// Combinational logic for 7-segment display
-	seven_segment_encoder encoder (.digit(switches), .segments(seven_segment_leds));
+	// Same note as above, switch pins are active low
+	seven_segment_encoder encoder (.digit(~switches), .segments(seven_segment_leds));
 endmodule
