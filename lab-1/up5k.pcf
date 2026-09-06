@@ -1,8 +1,8 @@
 set_io -nowarn -pullup yes -pullup_resistor 10K reset_bar 34
-set_io -nowarn -pullup yes -pullup_resistor 10K switches[0] 32
-set_io -nowarn -pullup yes -pullup_resistor 10K switches[1] 35
-set_io -nowarn -pullup yes -pullup_resistor 10K switches[2] 31
-set_io -nowarn -pullup yes -pullup_resistor 10K switches[3] 37
+set_io -nowarn -pullup yes -pullup_resistor 10K switches_bar[0] 32
+set_io -nowarn -pullup yes -pullup_resistor 10K switches_bar[1] 35
+set_io -nowarn -pullup yes -pullup_resistor 10K switches_bar[2] 31
+set_io -nowarn -pullup yes -pullup_resistor 10K switches_bar[3] 37
 set_io -nowarn leds[0] 42
 set_io -nowarn leds[1] 38
 set_io -nowarn leds[2] 28
