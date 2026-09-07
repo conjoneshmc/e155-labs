@@ -15,28 +15,28 @@ module lab1_cj_tb();
   
   // Test submodule connections
   always @(reset_bar) begin
-	assert (dut.led_counter.reset == ~reset_bar)
-	  else $error("FAILED! led_counter.reset is not connected to reset_bar properly");
+		assert (dut.led_counter.reset == ~reset_bar)
+			else $error("FAILED! led_counter.reset is not connected to reset_bar properly");
   end
   
   always @(switches_bar) begin
-	assert (dut.encoder.digit == ~switches_bar)
-	  else $error("FAILED! encoder.digit is not connected to switches_bar properly");
+		assert (dut.encoder.digit == ~switches_bar)
+			else $error("FAILED! encoder.digit is not connected to switches_bar properly");
   end
   
   always @(dut.hf_osc_clk) begin
-	assert (dut.led_counter.clk == dut.hf_osc_clk)
-	  else $error("FAILED! led_counter.clk is not connected to hf_osc_clk properly");
+		assert (dut.led_counter.clk == dut.hf_osc_clk)
+			else $error("FAILED! led_counter.clk is not connected to hf_osc_clk properly");
   end
   
   always @(dut.led_counter.value) begin
-	assert (dut.led_counter.value == dut.led_counter_value)
-	  else $error("FAILED! led_counter.value is not connected to led_counter_value properly");
+		assert (dut.led_counter.value == dut.led_counter_value)
+			else $error("FAILED! led_counter.value is not connected to led_counter_value properly");
   end
   
   always @(dut.encoder.segments) begin
-	assert (dut.encoder.segments == seven_segment_leds)
-	  else $error("FAILED! encoder.segments is not connected to seven_segment_leds properly");
+		assert (dut.encoder.segments == seven_segment_leds)
+			else $error("FAILED! encoder.segments is not connected to seven_segment_leds properly");
   end
 
   // Test top-level assignments
@@ -45,7 +45,7 @@ module lab1_cj_tb();
     reset_bar = ~1; #5; reset_bar = ~0; #5;
 	
 	// Test led[0] and s[1:0]
-    switches_bar[1:0] = ~2'b00; #10;
+	switches_bar[1:0] = ~2'b00; #10;
 	assert (leds[0] == 0)
 		$display("led[0] is correct for s[1:0] = 00 (1/4)");
 	else
