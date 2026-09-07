@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module clk_freq_divider_tb();
+module counter_tb();
   logic clk;
   logic enable;
   logic reset;
