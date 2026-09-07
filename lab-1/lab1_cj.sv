@@ -15,12 +15,12 @@ module lab1_cj(
 	);
 
 	// Clock counter to divide frequency
-	logic led_clk;
-	clk_freq_divider #(.WIDTH(32), .MAXCOUNT(5000000)) ctr (
-		.clk_in(hf_osc_clk),
+	logic [31:0] led_counter_value;
+	counter #(.WIDTH(32), .MAXCOUNT(10000000)) led_counter (
+		.clk(hf_osc_clk),
 		.enable(1'b1),
 		.reset(~reset_bar),
-		.clk_out(led_clk)
+		.value(led_counter_value)
 	);
 
 	// Combinational logic for switches
@@ -28,7 +28,7 @@ module lab1_cj(
 	// to invert them in our code
 	assign leds[0] = (~switches_bar[1]) ^ (~switches_bar[0]);
 	assign leds[1] = (~switches_bar[3]) & (~switches_bar[2]);
-	assign leds[2] = led_clk;
+	assign leds[2] = (led_counter_value >= 5000000);
 
 	// Combinational logic for 7-segment display
 	// Same note as above, switch pins are active low
