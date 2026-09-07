@@ -15,6 +15,9 @@ impl*/
 *.dmp
 ._Real_._Math_.vhd
 
+# apio files
+_build
+
 # Segger Embedded Studio
 **/Output/
 **/Debug/
