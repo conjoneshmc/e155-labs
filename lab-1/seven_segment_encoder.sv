@@ -4,7 +4,7 @@ module seven_segment_encoder(
 );
   always_comb begin
     unique case (digit)
-      // Format of digit_leds[6:0] is ABCDEFG
+      // Format of segments[6:0] is ABCDEFG
       // Display is common anode so a 0 turns the segment ON
       4'b0000: segments = 7'b0000001; // 0
       4'b0001: segments = 7'b1001111; // 1
