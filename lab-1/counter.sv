@@ -1,11 +1,11 @@
 module counter #(parameter WIDTH = 16, MAXCOUNT = (1<<WIDTH) - 1) (
   input logic clk,
-  input logic enable,
   input logic reset,
+  input logic enable,
   output logic [WIDTH-1:0] value
 );
   always_ff @(posedge clk or posedge reset) begin
-		if (reset) begin
+    if (reset) begin
       value <= 0;
     end
     else if (enable) begin
@@ -15,5 +15,5 @@ module counter #(parameter WIDTH = 16, MAXCOUNT = (1<<WIDTH) - 1) (
         value <= 0;
       end
     end
-	end
+  end
 endmodule
