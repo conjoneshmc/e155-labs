@@ -1,4 +1,4 @@
-module counter #(parameter int WIDTH, int MAXCOUNT = (1<<WIDTH) - 1) (
+module counter #(parameter WIDTH, MAXCOUNT = (1<<WIDTH) - 1) (
   input logic clk,
   input logic enable,
   input logic reset,
