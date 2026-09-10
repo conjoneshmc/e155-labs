@@ -3,17 +3,12 @@ module dual_seg7 #(parameter int SWITCH_CYCLES) (
   input logic reset,
   input logic [3:0] digit_1,
   input logic [3:0] digit_0,
-  output logic anode_select, // 1 if we're displaying digit_1, 0 otherwise
+  output logic [1:0] anodes,
   output logic [6:0] segments
 );
-  logic [$clog2(SWITCH_CYCLES)-1:0] switch_ctr_val;
-  logic [3:0] digit_to_use;
-
   // Internal counter used to multiplex the two digits of the display
-  counter #(
-    .WIDTH($clog2(SWITCH_CYCLES)),
-    .MAXCOUNT(SWITCH_CYCLES)
-  ) switch_ctr(
+  logic [$clog2(SWITCH_CYCLES)-1:0] switch_ctr_val;
+  counter #(.WIDTH($clog2(SWITCH_CYCLES)), .MAXCOUNT(SWITCH_CYCLES)) switch_ctr(
     .clk,
     .reset,
     .enable(1'b1),
@@ -21,13 +16,15 @@ module dual_seg7 #(parameter int SWITCH_CYCLES) (
   );
 
   // Output CL for anode and cathodes of seven segment display
+  logic anode_select;
+  logic [3:0] digit_to_use;
   always_comb begin
     anode_select = (switch_ctr_val >= (SWITCH_CYCLES / 2));
+    anodes = {~anode_select, anode_select}; // Anodes are active LOW
     digit_to_use = anode_select ? digit_1 : digit_0;
-
     unique case (digit_to_use)
       // Format of segments[6:0] is ABCDEFG
-      // Display is common anode so a 0 turns the segment ON
+      // Segments are active LOW
       4'b0000: segments = 7'b0000001; // 0
       4'b0001: segments = 7'b1001111; // 1
       4'b0010: segments = 7'b0010010; // 2
