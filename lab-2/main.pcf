@@ -8,10 +8,10 @@ set_io -pullup yes -pullup_resistor 10K n_digit_1[3] 32
 set_io -pullup yes -pullup_resistor 10K n_digit_1[2] 35
 set_io -pullup yes -pullup_resistor 10K n_digit_1[1] 31
 set_io -pullup yes -pullup_resistor 10K n_digit_1[0] 37
-set_io -pullup yes -pullup_resistor 10K n_digit_0[3] 10
-set_io -pullup yes -pullup_resistor 10K n_digit_0[2] 21
-set_io -pullup yes -pullup_resistor 10K n_digit_0[1] 19
-set_io -pullup yes -pullup_resistor 10K n_digit_0[0] 6
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[3] 10
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[2] 21
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[1] 19
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[0] 11
 set_io seg7_anode[1] 45
 set_io seg7_anode[0] 46
 set_io seg7_segments[6] 3 # A
