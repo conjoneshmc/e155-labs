@@ -1,8 +1,8 @@
 module dual_seg7 #(parameter int SWITCH_CYCLES) (
   input logic clk,
   input logic reset,
-  input logic [3:0] digit_0,
   input logic [3:0] digit_1,
+  input logic [3:0] digit_0,
   output logic anode_select, // 1 if we're displaying digit_1, 0 otherwise
   output logic [6:0] segments
 );
