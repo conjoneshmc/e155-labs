@@ -1,4 +1,4 @@
-module dual_seg7 #(parameter int SWITCH_CYCLES) (
+module dual_seg7 #(parameter int MULTIPLEX_PERIOD) (
   input logic clk,
   input logic reset,
   input logic [3:0] digit_1,
@@ -7,40 +7,21 @@ module dual_seg7 #(parameter int SWITCH_CYCLES) (
   output logic [6:0] segments
 );
   // Internal counter used to multiplex the two digits of the display
-  logic [$clog2(SWITCH_CYCLES)-1:0] switch_ctr_val;
-  counter #(.WIDTH($clog2(SWITCH_CYCLES)), .MAXCOUNT(SWITCH_CYCLES)) switch_ctr(
+  logic [$clog2(MULTIPLEX_PERIOD)-1:0] multiplex_ctr_value;
+  counter #(.WIDTH($clog2(MULTIPLEX_PERIOD)), .MAXCOUNT(MULTIPLEX_PERIOD)) multiplex_ctr(
     .clk,
     .reset,
     .enable(1'b1),
-    .value(switch_ctr_val)
+    .value(multiplex_ctr_value)
   );
 
   // Output CL for anode and cathodes of seven segment display
   logic anode_select;
   logic [3:0] digit_to_use;
+  seg7 display(.digit(digit_to_use), .segments);
   always_comb begin
-    anode_select = (switch_ctr_val >= (SWITCH_CYCLES / 2));
+    anode_select = (multiplex_ctr_value >= (MULTIPLEX_PERIOD / 2));
     anodes = {~anode_select, anode_select}; // Anodes are active LOW
     digit_to_use = anode_select ? digit_1 : digit_0;
-    unique case (digit_to_use)
-      // Format of segments[6:0] is ABCDEFG
-      // Segments are active LOW
-      4'b0000: segments = 7'b0000001; // 0
-      4'b0001: segments = 7'b1001111; // 1
-      4'b0010: segments = 7'b0010010; // 2
-      4'b0011: segments = 7'b0000110; // 3
-      4'b0100: segments = 7'b1001100; // 4
-      4'b0101: segments = 7'b0100100; // 5
-      4'b0110: segments = 7'b0100000; // 6
-      4'b0111: segments = 7'b0001111; // 7
-      4'b1000: segments = 7'b0000000; // 8
-      4'b1001: segments = 7'b0000100; // 9
-      4'b1010: segments = 7'b0001000; // A
-      4'b1011: segments = 7'b1100000; // B
-      4'b1100: segments = 7'b0110001; // C
-      4'b1101: segments = 7'b1000010; // D
-      4'b1110: segments = 7'b0110000; // E
-      4'b1111: segments = 7'b0111000; // F
-    endcase
   end
 endmodule
