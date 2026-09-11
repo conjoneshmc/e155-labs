@@ -12,6 +12,7 @@ set_io -pullup yes -pullup_resistor 3P3K n_digit_0[3] 10
 set_io -pullup yes -pullup_resistor 3P3K n_digit_0[2] 21
 set_io -pullup yes -pullup_resistor 3P3K n_digit_0[1] 19
 set_io -pullup yes -pullup_resistor 3P3K n_digit_0[0] 11
+
 set_io seg7_anodes[1] 45
 set_io seg7_anodes[0] 46
 set_io seg7_segments[6] 3 # A
@@ -21,3 +22,18 @@ set_io seg7_segments[3] 18 # D
 set_io seg7_segments[2] 13 # E
 set_io seg7_segments[1] 12 # F
 set_io seg7_segments[0] 20 # G
+
+set_io keypad_cols[3] 6
+set_io keypad_cols[2] 4
+set_io keypad_cols[1] 48
+set_io keypad_cols[0] 47
+
+set_io keypad_rows[3] 2
+set_io keypad_rows[2] 23
+set_io keypad_rows[1] 25
+set_io keypad_rows[0] 26
+
+set_io leds[3] 27
+set_io leds[2] 42
+set_io leds[1] 38
+set_io leds[0] 28
