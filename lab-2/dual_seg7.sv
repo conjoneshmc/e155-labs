@@ -15,13 +15,15 @@ module dual_seg7 #(parameter int MULTIPLEX_PERIOD) (
     .value(multiplex_ctr_value)
   );
 
-  // Output CL for anode and cathodes of seven segment display
+  // Combinational logic for anode and cathodes of seven segment display
   logic anode_select;
   logic [3:0] digit_to_use;
-  seg7 display(.digit(digit_to_use), .segments);
   always_comb begin
     anode_select = (multiplex_ctr_value >= (MULTIPLEX_PERIOD / 2));
     anodes = {~anode_select, anode_select}; // Anodes are active LOW
     digit_to_use = anode_select ? digit_1 : digit_0;
   end
+
+  // Only instantiate one 7-segment module
+  seg7 display(.digit(digit_to_use), .segments);
 endmodule

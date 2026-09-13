@@ -17,6 +17,7 @@ set_io -pullup yes -pullup_resistor 3P3K n_digit_0[0] 11
 
 set_io seg7_anodes[1] 45
 set_io seg7_anodes[0] 46
+
 set_io seg7_segments[6] 3 # A
 set_io seg7_segments[5] 44 # B
 set_io seg7_segments[4] 9 # C
