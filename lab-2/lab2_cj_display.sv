@@ -14,7 +14,8 @@ module lab2_cj_display (
   );
 
   // Multiplexed dual 7-segment display
-  dual_seg7 #(.MULTIPLEX_PERIOD(200000)) display(
+  // 200000
+  dual_seg7 #(.MULTIPLEX_PERIOD(8)) display(
     .clk(hf_osc_clk),
     .reset(~n_reset),
     .digit_1(~n_digit_1),
