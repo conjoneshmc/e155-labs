@@ -1,0 +1,27 @@
+# Mapping of the design signals to FPGA pins.
+
+# The full Upduino3 PCF file is availble at:
+#  https://github.com/tinyvision-ai-inc/UPduino-v3.0/tree/master/RTL/common
+
+set_io -pullup yes -pullup_resistor 10K n_reset 34
+
+set_io -pullup yes -pullup_resistor 10K n_digit_1[3] 32
+set_io -pullup yes -pullup_resistor 10K n_digit_1[2] 35
+set_io -pullup yes -pullup_resistor 10K n_digit_1[1] 31
+set_io -pullup yes -pullup_resistor 10K n_digit_1[0] 37
+
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[3] 10
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[2] 21
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[1] 19
+set_io -pullup yes -pullup_resistor 3P3K n_digit_0[0] 11
+
+set_io seg7_anodes[1] 45
+set_io seg7_anodes[0] 46
+
+set_io seg7_segments[6] 3 # A
+set_io seg7_segments[5] 44 # B
+set_io seg7_segments[4] 9 # C
+set_io seg7_segments[3] 18 # D
+set_io seg7_segments[2] 13 # E
+set_io seg7_segments[1] 12 # F
+set_io seg7_segments[0] 20 # G

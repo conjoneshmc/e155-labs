@@ -13,6 +13,7 @@ impl*/
 *.ccl
 *.srp
 *.dmp
+*.gtkw
 ._Real_._Math_.vhd
 
 # apio files
