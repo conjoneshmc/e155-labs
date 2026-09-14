@@ -25,7 +25,28 @@ module lab2_cj_keypad_tb();
     dut.hf_osc_clk = 0;
     reset = 1;
     keypad_cols = 4'b0000;
+    #10;
+    reset = 0;
+    #10;
 
+    assert (leds == 4'b1111) else
+      $error("FAILED! leds has wrong value");
+
+    keypad_cols = 4'b0010;
+    #5;
+    assert (leds == 4'b1101) else
+      $error("FAILED! leds has wrong value");
+
+    keypad_cols = 4'b1100;
+    #5;
+    assert (leds == 4'b0011) else
+      $error("FAILED! leds has wrong value");
+
+    clk_toggle(18);
+    assert(keypad_rows == 4'b0010) else
+      $error("FAILED! keypad_rows has wrong value");
+
+    #20;
     $finish();
   end
 endmodule
