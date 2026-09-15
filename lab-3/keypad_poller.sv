@@ -1,23 +1,23 @@
-module keypad_poller #(parameter int SCAN_DELAY) (
+module keypad_poller #(parameter int DELAY) (
   input logic clk,
   input logic reset,
   input logic enable,
-  output logic [3:0] out
+  output logic [3:0] rows
 );
   // Internal logic used to toggle between different states
-  logic [$clog2(4*SCAN_DELAY)-1:0] state_ctr_value;
-  counter #(.WIDTH($clog2(4*SCAN_DELAY)), .MAXCOUNT(4*SCAN_DELAY)) state_ctr(
+  logic [$clog2(4*DELAY)-1:0] value;
+  counter #(.WIDTH($clog2(4*DELAY)), .MAX_COUNT(4*DELAY)) ctr(
     .clk,
     .reset,
     .enable,
-    .value(state_ctr_value)
+    .value
   );
 
   // Rotate between the different outputs every SCAN_DELAY cycles
   always_comb begin
-    if      (state_ctr_value < SCAN_DELAY)   out = 4'b1000;
-    else if (state_ctr_value < 2*SCAN_DELAY) out = 4'b0100;
-    else if (state_ctr_value < 3*SCAN_DELAY) out = 4'b0010;
-    else                                     out = 4'b0001;
+    if      (value < DELAY)       rows = 4'b1000;
+    else if (value < 2*DELAY)     rows = 4'b0100;
+    else if (value < 3*DELAY)     rows = 4'b0010;
+    else                          rows = 4'b0001;
   end
 endmodule

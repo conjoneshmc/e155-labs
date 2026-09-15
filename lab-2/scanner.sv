@@ -6,7 +6,7 @@ module scanner #(parameter int SCAN_DELAY) (
 );
   // Internal logic used to toggle between different states
   logic [$clog2(4*SCAN_DELAY)-1:0] state_ctr_value;
-  counter #(.WIDTH($clog2(4*SCAN_DELAY)), .MAXCOUNT(4*SCAN_DELAY)) state_ctr(
+  counter #(.WIDTH($clog2(4*SCAN_DELAY)), .MAX_COUNT(4*SCAN_DELAY)) state_ctr(
     .clk,
     .reset,
     .enable,
