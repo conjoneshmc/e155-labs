@@ -3,3 +3,6 @@
 # The full Upduino3 PCF file is availble at:
 #  https://github.com/tinyvision-ai-inc/UPduino-v3.0/tree/master/RTL/common
 
+set_io -pullup yes -pullup_resistor 10K n_reset 34
+set_io -pullup yes -pullup_resistor 10K n_in 43
+set_io out 28
