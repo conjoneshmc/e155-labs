@@ -11,7 +11,7 @@ module lab3_cj(
     .CLKHF(hf_osc_clk)
   );
 
-  debouncer #(.DELAY(720000)) button (
+  debouncer #(.DELAY(1200000)) button (
     .clk(hf_osc_clk),
     .reset(~n_reset),
     .enable(1'b1),
