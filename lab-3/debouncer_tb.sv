@@ -16,7 +16,7 @@ module debouncer_tb();
   endtask
 
   initial begin
-    $dumpvars(0, clk, reset, enable, in, out, dut.value, dut.overflow);
+    $dumpvars(0, clk, reset, enable, in, out, dut.value);
 
     clk = 0;
     enable = 1;

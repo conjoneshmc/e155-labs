@@ -5,13 +5,13 @@ module lab3_cj(
 );
   // Internal clock @ 24 MHz
   logic hf_osc_clk;
-  SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc (
+  SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc(
     .CLKHFPU(1'b1),
     .CLKHFEN(1'b1),
     .CLKHF(hf_osc_clk)
   );
 
-  debouncer #(.DELAY(1200000)) button (
+  debouncer #(.DELAY(1200000)) button(
     .clk(hf_osc_clk),
     .reset(~n_reset),
     .enable(1'b1),
