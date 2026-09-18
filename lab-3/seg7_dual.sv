@@ -1,4 +1,4 @@
-module dual_seg7 #(parameter int PERIOD) (
+module seg7_dual #(parameter int PERIOD) (
   input logic clk,
   input logic reset,
   input logic [3:0] digit_1,
