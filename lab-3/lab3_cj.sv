@@ -1,21 +1,34 @@
 module lab3_cj(
   input logic n_reset,
-  input logic n_in,
-  output logic out
+  input logic [3:0] n_keypad_cols,
+  output logic [3:0] keypad_rows,
+  output logic [1:0] seg7_anodes,
+  output logic [6:0] seg7_segments
 );
+  logic clk;
+  logic [3:0] keypad_buttons [4];
+
   // Internal clock @ 24 MHz
-  logic hf_osc_clk;
   SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc(
     .CLKHFPU(1'b1),
     .CLKHFEN(1'b1),
-    .CLKHF(hf_osc_clk)
+    .CLKHF(clk)
   );
 
-  debouncer #(.DELAY(1200000)) button(
-    .clk(hf_osc_clk),
+  // Temporarily disable display
+  assign seg7_anodes = 2'b11;
+  assign seg7_segments = 7'b1111111;
+
+  // Keypad
+  keypad #(
+    .POLL_DELAY(48000), // 2ms
+    .DEBOUNCE_DELAY(960000) // 40ms
+  ) inputs(
+    .clk,
     .reset(~n_reset),
     .enable(1'b1),
-    .in(~n_in),
-    .out
+    .cols(~n_keypad_cols),
+    .rows(keypad_rows),
+    .buttons(keypad_buttons)
   );
 endmodule
