@@ -39,7 +39,7 @@ module keypad_tb();
     buttons_pressed[3][3] = 1; #20;
     buttons_pressed[1][0] = 1; #80;
     buttons_pressed[2][3] = 1;
-    buttons_pressed[2][2] = 1; #400;
+    buttons_pressed[2][2] = 1; #500;
 
     // We're done!
     $finish();

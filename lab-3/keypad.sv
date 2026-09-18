@@ -50,13 +50,13 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
       // This extra register addresses this timing error
       // Note that since this is a non-blocking assignment, the value of `cols_prev` is actually from
       // the previous clock cycle. The assignment doesn't affect the if statements below
-      cols_prev <= cols;
+      // cols_prev <= cols;
 
       // Update the row currently being interrogated with the buttons being pressed in this row
-      if      (rows == 4'b0001) buttons_raw[0] <= cols_prev;
-      else if (rows == 4'b0010) buttons_raw[1] <= cols_prev;
-      else if (rows == 4'b0100) buttons_raw[2] <= cols_prev;
-      else if (rows == 4'b1000) buttons_raw[3] <= cols_prev;
+      if      (rows == 4'b0001) buttons_raw[0] <= cols;
+      else if (rows == 4'b0010) buttons_raw[1] <= cols;
+      else if (rows == 4'b0100) buttons_raw[2] <= cols;
+      else if (rows == 4'b1000) buttons_raw[3] <= cols;
       // For invalid row outputs, don't update anything
     end
   end
