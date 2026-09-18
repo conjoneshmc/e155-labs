@@ -9,8 +9,9 @@ module debouncer #(parameter int DELAY) (
 
   counter #(.WIDTH($clog2(DELAY)), .MAX_COUNT(DELAY)) ctr(
     .clk,
-    // If the debouncer inputs and outputs are equal, the debounce timer should be stopped
-    .reset(reset | (in == out)),
+    // If the debouncer inputs and outputs are equal, the debounce timer should be reset
+    // This trigger should not apply if the device is disabled
+    .reset(reset | (enable & (in == out))),
     .enable,
     .value(debounce_timer)
   );

@@ -1,20 +1,36 @@
-module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
+module keypad #(
+  parameter int POLL_DELAY,
+  parameter int SETTLE_DELAY,
+  parameter int DEBOUNCE_DELAY
+) (
   input logic clk,
   input logic reset,
   input logic enable,
   input logic [3:0] cols,
   output logic [3:0] rows,
-  output logic [3:0] buttons [4]
+  output logic [3:0] [3:0] buttons
 );
-  logic [3:0] buttons_raw [4]; // Un-debounced inputs for each of the buttons
+  logic enable_debouncers;
+  logic [3:0] [3:0] buttons_raw; // Un-debounced inputs for each of the buttons
 
   // Responsible for interrogating the different keypad rows
-  // Canonical FSM that just rotates between pulling each row pin high
-  keypad_poller #(.DELAY(POLL_DELAY)) poller(
+  // This state machine just rotates between pulling each row pin high
+  keypad_poller #(.POLL_DELAY(POLL_DELAY)) poller(
     .clk,
     .reset,
     .enable,
     .rows
+  );
+
+  // We don't want to look at the column pins right after a row has changed, so we can wait for
+  // everything to settle
+  // This state machine disables all the debouncers for a certain period after each row change,
+  // then turns them back on
+  keypad_settler #(.POLL_DELAY(POLL_DELAY), .SETTLE_DELAY(SETTLE_DELAY)) settler(
+    .clk,
+    .reset,
+    .enable,
+    .settled(enable_debouncers)
   );
 
   // Each button on the keypad needs its own debouncer
@@ -25,7 +41,7 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
         debouncer #(.DELAY(DEBOUNCE_DELAY)) button(
           .clk,
           .reset,
-          .enable,
+          .enable(enable & enable_debouncers),
           .in(buttons_raw[row][col]),
           .out(buttons[row][col])
         );

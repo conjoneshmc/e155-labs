@@ -25,3 +25,7 @@ set_io seg7_segments[3] 18 # D
 set_io seg7_segments[2] 13 # E
 set_io seg7_segments[1] 12 # F
 set_io seg7_segments[0] 20 # G
+
+set_io leds[2] 42
+set_io leds[1] 38
+set_io leds[0] 28

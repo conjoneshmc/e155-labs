@@ -6,8 +6,8 @@ module keypad_tb();
   logic enable;
   logic [3:0] cols;
   logic [3:0] rows;
-  logic [3:0] buttons [4];
-  logic [3:0] buttons_pressed [4];
+  logic [3:0] [3:0] buttons;
+  logic [3:0] [3:0] buttons_pressed;
   keypad #(.POLL_DELAY(2), .DEBOUNCE_DELAY(20)) dut(.clk, .reset, .enable, .cols, .rows, .buttons);
 
   always #10 clk = ~clk;

@@ -3,10 +3,11 @@ module lab3_cj(
   input logic [3:0] n_keypad_cols,
   output logic [3:0] keypad_rows,
   output logic [1:0] seg7_anodes,
-  output logic [6:0] seg7_segments
+  output logic [6:0] seg7_segments,
+  output logic [2:0] leds
 );
   logic clk;
-  logic [3:0] keypad_buttons [4];
+  logic [3:0] [3:0] keypad_buttons;
 
   // Internal clock @ 24 MHz
   SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc(
@@ -21,7 +22,8 @@ module lab3_cj(
 
   // Keypad
   keypad #(
-    .POLL_DELAY(48000), // 2ms
+    .POLL_DELAY(240000),    // 10ms
+    .SETTLE_DELAY(24000),   // 1ms
     .DEBOUNCE_DELAY(960000) // 40ms
   ) inputs(
     .clk,
@@ -31,4 +33,8 @@ module lab3_cj(
     .rows(keypad_rows),
     .buttons(keypad_buttons)
   );
+
+  assign leds[2] = keypad_buttons[3][3]; // Button 1
+  assign leds[1] = keypad_buttons[3][2]; // Button 2
+  assign leds[0] = keypad_buttons[3][1]; // Button 3
 endmodule
