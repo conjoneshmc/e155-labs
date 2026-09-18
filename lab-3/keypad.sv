@@ -10,7 +10,7 @@ module keypad #(
   output logic [3:0] rows,
   output logic [3:0] [3:0] buttons
 );
-  logic enable_debouncers;
+  logic enable_debouncers; // Need to freeze the debouncers during row changes
   logic [3:0] [3:0] buttons_raw; // Un-debounced inputs for each of the buttons
 
   // Responsible for interrogating the different keypad rows

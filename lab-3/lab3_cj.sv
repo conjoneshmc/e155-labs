@@ -3,11 +3,12 @@ module lab3_cj(
   input logic [3:0] n_keypad_cols,
   output logic [3:0] keypad_rows,
   output logic [1:0] seg7_anodes,
-  output logic [6:0] seg7_segments,
-  output logic [2:0] leds
+  output logic [6:0] seg7_segments
 );
   logic clk;
   logic [3:0] [3:0] keypad_buttons;
+  logic [3:0] keypad_digit_1;
+  logic [3:0] keypad_digit_0;
 
   // Internal clock @ 24 MHz
   SB_HFOSC #(.CLKHF_DIV("0b01")) hf_osc(
@@ -16,16 +17,12 @@ module lab3_cj(
     .CLKHF(clk)
   );
 
-  // Temporarily disable display
-  assign seg7_anodes = 2'b11;
-  assign seg7_segments = 7'b1111111;
-
-  // Keypad
+  // Keypad scanner and digit entry handler
   keypad #(
-    .POLL_DELAY(240000),    // 10ms
-    .SETTLE_DELAY(24000),   // 1ms
-    .DEBOUNCE_DELAY(960000) // 40ms
-  ) inputs(
+    .POLL_DELAY(48000),     // 2ms
+    .SETTLE_DELAY(12000),   // 0.5ms
+    .DEBOUNCE_DELAY(576000) // 24ms
+  ) keys(
     .clk,
     .reset(~n_reset),
     .enable(1'b1),
@@ -34,7 +31,23 @@ module lab3_cj(
     .buttons(keypad_buttons)
   );
 
-  assign leds[2] = keypad_buttons[3][3]; // Button 1
-  assign leds[1] = keypad_buttons[3][2]; // Button 2
-  assign leds[0] = keypad_buttons[3][1]; // Button 3
+  keypad_entry entry(
+    .clk,
+    .reset(~n_reset),
+    .buttons(keypad_buttons),
+    .digit_1(keypad_digit_1),
+    .digit_0(keypad_digit_0)
+  );
+
+  // Dual 7-segment display
+  seg7_dual #(
+    .DELAY(120000) // 5ms
+  ) display(
+    .clk,
+    .reset(~n_reset),
+    .digit_1(keypad_digit_1),
+    .digit_0(keypad_digit_0),
+    .anodes(seg7_anodes),
+    .segments(seg7_segments)
+  );
 endmodule
