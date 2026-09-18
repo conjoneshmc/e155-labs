@@ -7,8 +7,10 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
   output logic [3:0] buttons [4]
 );
   logic [3:0] cols_prev; // To fix a timing error
-  logic [3:0] buttons_raw [4]; // Undebounced inputs for each of the buttons
+  logic [3:0] buttons_raw [4]; // Un-debounced inputs for each of the buttons
 
+  // Responsible for interrogating the different keypad rows
+  // Canonical FSM that just rotates between pulling each row pin high
   keypad_poller #(.DELAY(POLL_DELAY)) poller(
     .clk,
     .reset,
@@ -16,6 +18,7 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
     .rows
   );
 
+  // Each button on the keypad needs its own debouncer
   genvar row, col;
   generate
     for (row = 0; row < 4; row++) begin : gen_keypad_rows
@@ -31,15 +34,16 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
     end
   endgenerate
 
+  // Logic responsible for updating `buttons_raw`
   always_ff @(posedge clk) begin
     if (reset) begin
-      cols_prev <= 0;
+      cols_prev <= 4'b0000;
       buttons_raw[0] <= 4'b0000;
       buttons_raw[1] <= 4'b0000;
       buttons_raw[2] <= 4'b0000;
       buttons_raw[3] <= 4'b0000;
     end else begin
-      // Because rows is also updated on the rising edge of the clock, the value of `rows` read in
+      // Because `rows` is also updated on the rising edge of the clock, the value of `rows` read in
       // the if statement is actually the one from the PREVIOUS clock cycle
       // Therefore, we need the value of `cols` from the previous clock cycle too, so we can update
       // the `buttons_raw` array correctly
@@ -48,12 +52,12 @@ module keypad #(parameter int POLL_DELAY, parameter int DEBOUNCE_DELAY) (
       // the previous clock cycle. The assignment doesn't affect the if statements below
       cols_prev <= cols;
 
-      // Based on the row being interrogated, update the appropriate inputs
-      // For invalid row outputs, don't update anything
+      // Update the row currently being interrogated with the buttons being pressed in this row
       if      (rows == 4'b0001) buttons_raw[0] <= cols_prev;
       else if (rows == 4'b0010) buttons_raw[1] <= cols_prev;
       else if (rows == 4'b0100) buttons_raw[2] <= cols_prev;
       else if (rows == 4'b1000) buttons_raw[3] <= cols_prev;
+      // For invalid row outputs, don't update anything
     end
   end
 endmodule

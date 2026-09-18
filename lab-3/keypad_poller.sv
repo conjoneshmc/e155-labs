@@ -16,9 +16,9 @@ module keypad_poller #(parameter int DELAY) (
 
   // Rotate between the different outputs every DELAY cycles
   always_comb begin
-    if      (value < DELAY)       rows = 4'b0001;
-    else if (value < 2*DELAY)     rows = 4'b0010;
-    else if (value < 3*DELAY)     rows = 4'b0100;
-    else                          rows = 4'b1000;
+    if      (value < DELAY)   rows = 4'b0001;
+    else if (value < 2*DELAY) rows = 4'b0010;
+    else if (value < 3*DELAY) rows = 4'b0100;
+    else                      rows = 4'b1000;
   end
 endmodule
