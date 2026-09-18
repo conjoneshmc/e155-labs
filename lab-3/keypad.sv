@@ -10,7 +10,7 @@ module keypad #(
   output logic [3:0] rows,
   output logic [3:0] [3:0] buttons
 );
-  logic enable_debouncers; // Need to freeze the debouncers during row changes
+  logic settled; // Whether to actually look at the column inputs
   logic [3:0] [3:0] buttons_raw; // Un-debounced inputs for each of the buttons
 
   // Responsible for interrogating the different keypad rows
@@ -30,7 +30,7 @@ module keypad #(
     .clk,
     .reset,
     .enable,
-    .settled(enable_debouncers)
+    .settled
   );
 
   // Each button on the keypad needs its own debouncer
@@ -41,7 +41,7 @@ module keypad #(
         debouncer #(.DELAY(DEBOUNCE_DELAY)) button(
           .clk,
           .reset,
-          .enable(enable & enable_debouncers),
+          .enable,
           .in(buttons_raw[row][col]),
           .out(buttons[row][col])
         );
@@ -56,7 +56,7 @@ module keypad #(
       buttons_raw[1] <= 4'b0000;
       buttons_raw[2] <= 4'b0000;
       buttons_raw[3] <= 4'b0000;
-    end else begin
+    end else if (settled) begin
       // Update the row currently being interrogated with the buttons being pressed in this row
       if      (rows == 4'b0001) buttons_raw[0] <= cols;
       else if (rows == 4'b0010) buttons_raw[1] <= cols;
