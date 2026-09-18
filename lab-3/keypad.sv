@@ -22,7 +22,7 @@ module keypad #(
     .rows
   );
 
-  // We don't want to look at the column pins right after a row has changed, so we can wait for
+  // We don't want to look at the column pins right after a row has changed, instead we wait for
   // everything to settle
   // This state machine disables all the debouncers for a certain period after each row change,
   // then turns them back on

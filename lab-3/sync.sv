@@ -1,10 +1,10 @@
-module sync(
+module sync #(parameter int WIDTH) (
   input logic clk,
   input logic reset,
-  input logic in,
-  output logic out
+  input logic [WIDTH-1:0] in,
+  output logic [WIDTH-1:0] out
 );
-  logic temp;
+  logic [WIDTH-1:0] temp;
 
   always_ff @(posedge clk) begin
     if (reset) begin

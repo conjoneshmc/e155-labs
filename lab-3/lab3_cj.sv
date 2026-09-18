@@ -6,6 +6,7 @@ module lab3_cj(
   output logic [6:0] seg7_segments
 );
   logic clk;
+  logic [3:0] keypad_cols;
   logic [3:0] [3:0] keypad_buttons;
   logic [3:0] keypad_digit_1;
   logic [3:0] keypad_digit_0;
@@ -17,6 +18,14 @@ module lab3_cj(
     .CLKHF(clk)
   );
 
+  // Synchronize async inputs
+  sync #(.WIDTH(4)) keypad_sync(
+    .clk,
+    .reset(~n_reset),
+    .in(~n_keypad_cols),
+    .out(keypad_cols)
+  );
+
   // Keypad scanner and digit entry handler
   keypad #(
     .POLL_DELAY(48000),     // 2ms
@@ -26,7 +35,7 @@ module lab3_cj(
     .clk,
     .reset(~n_reset),
     .enable(1'b1),
-    .cols(~n_keypad_cols),
+    .cols(keypad_cols),
     .rows(keypad_rows),
     .buttons(keypad_buttons)
   );
