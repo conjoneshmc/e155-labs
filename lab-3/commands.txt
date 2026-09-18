@@ -1,4 +1,4 @@
-yosys -p "synth_ice40 -top lab3_cj -json _build\default\hardware.json " -q -DSYNTHESIZE counter.sv debouncer.sv keypad.sv keypad_decoder.sv keypad_entry.sv keypad_poller.sv keypad_settler.sv lab3_cj.sv seg7.sv seg7_dual.sv sync.sv
+yosys -p "synth_ice40 -top lab3_cj -json _build\default\hardware.json " -q -DSYNTHESIZE counter.sv debouncer.sv keypad.sv keypad_decoder.sv keypad_entry.sv keypad_multipress.sv keypad_poller.sv keypad_settler.sv lab3_cj.sv seg7.sv seg7_dual.sv sync.sv
 
 nextpnr-ice40 --up5k --package sg48 --json _build\default\hardware.json --asc _build\default\hardware.asc --report _build\default\hardware.pnr --pcf main.pcf -q
 

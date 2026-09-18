@@ -1,6 +1,7 @@
 module keypad_decoder(
   input logic [3:0] [3:0] buttons,
-  output logic [3:0] digit
+  output logic [3:0] digit,
+  output logic [3:0] num_pressed
 );
   always_comb begin
     if      (buttons[3][3]) digit = 4'h1;
@@ -21,4 +22,6 @@ module keypad_decoder(
     else if (buttons[0][0]) digit = 4'hD;
     else                    digit = 4'h0;
   end
+
+  assign num_pressed = $countones(buttons);
 endmodule
