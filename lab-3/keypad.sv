@@ -56,7 +56,8 @@ module keypad #(
       buttons_raw[1] <= 4'b0000;
       buttons_raw[2] <= 4'b0000;
       buttons_raw[3] <= 4'b0000;
-    end else if (settled) begin
+    end
+    else if (settled) begin
       // Update the row currently being interrogated with the buttons being pressed in this row
       if      (rows == 4'b0001) buttons_raw[0] <= cols;
       else if (rows == 4'b0010) buttons_raw[1] <= cols;
