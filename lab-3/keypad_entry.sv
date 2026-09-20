@@ -29,11 +29,9 @@ module keypad_entry(
       digit_1 <= 4'h0;
       digit_0 <= 4'h0;
     end
-    else begin
-      if (should_update) begin
-        digit_1 <= digit_0;
-        digit_0 <= next_digit;
-      end
+    else if (should_update) begin
+      digit_1 <= digit_0;
+      digit_0 <= next_digit;
     end
   end
 endmodule
