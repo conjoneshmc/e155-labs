@@ -22,6 +22,14 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 Top level modules:
 	seg7
 
+} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_decoder_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_decoder_tb.sv}
+Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
+-- Compiling module keypad_decoder_tb
+
+Top level modules:
+	keypad_decoder_tb
+
 } {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_entry.sv} {2 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_entry.sv}
 Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 ** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
@@ -39,6 +47,14 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 Top level modules:
 	counter
 
+} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_entry_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_entry_tb.sv}
+Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
+-- Compiling module keypad_entry_tb
+
+Top level modules:
+	keypad_entry_tb
+
 } {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_poller.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_poller.sv}
 Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 ** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
@@ -46,6 +62,14 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 
 Top level modules:
 	keypad_poller
+
+} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_settler_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_settler_tb.sv}
+Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
+-- Compiling module keypad_settler_tb
+
+Top level modules:
+	keypad_settler_tb
 
 } {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/sync.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/sync.sv}
 Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
@@ -71,6 +95,14 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 Top level modules:
 	keypad_settler
 
+} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_multipress_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_multipress_tb.sv}
+Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
+-- Compiling module keypad_multipress_tb
+
+Top level modules:
+	keypad_multipress_tb
+
 } {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/keypad_tb.sv}
 Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 ** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
@@ -78,6 +110,14 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 
 Top level modules:
 	keypad_tb
+
+} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/seg7_dual.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/seg7_dual.sv}
+Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
+-- Compiling module seg7_dual
+
+Top level modules:
+	seg7_dual
 
 } {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_decoder.sv} {2 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/keypad_decoder.sv}
 Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
@@ -87,13 +127,5 @@ Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
 
 Top level modules:
 	keypad_decoder
-
-} {} {}} {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/seg7_dual.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/seg7_dual.sv}
-Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-** Note: (vlog-220) 'C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-3/testbenches/testbenches.mpf' is used as the ini file.
--- Compiling module seg7_dual
-
-Top level modules:
-	seg7_dual
 
 } {} {}}
