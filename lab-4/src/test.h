@@ -1,0 +1,1 @@
+#define GPIOB_BASE 0x48000400U
