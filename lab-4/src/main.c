@@ -5,20 +5,21 @@
 // Peripheral configuration
 //
 void configure_clocks(void) {
-  // Set MSION = 1 (enable MSI clock)
-  RCC->CR |= (1 << 0);
-  // Set SW[1:0] = 00 (use MSI as system clock)
-  RCC->CFGR &= ~(1 << 1);
-  RCC->CFGR &= ~(1 << 0);
-
   // Set MSIRANGE[3:0] = 0110 (set MSI clock frequency to 4MHz)
   RCC->CR &= ~(0b1111 << 4);
   RCC->CR |=  (0b0110 << 4);
   // Set MSIRGSEL = 1 (use the provided clock frequency in the CR register)
   RCC->CR |= (1 << 3);
+  // Set MSION = 1 (enable MSI clock)
+  RCC->CR |= (1 << 0);
+  // Set SW[1:0] = 00 (use MSI as system clock)
+  RCC->CFGR &= ~(0b11 << 0);
+
   // Set HPRE[3:0] = 0000 (AHB prescaler not dividing SYSCLK)
   RCC->CFGR &= ~(0b1111 << 4);
-  // Set PPRE1[2:0] = 1111 (APB1 prescaler dividing SYSCLK by 16, for 250kHz)
+  // Set PPRE1[2:0] = 111 (APB1 prescaler dividing SYSCLK by 16, for 250kHz)
+  // !! IMPORTANT !! The frequency that the timers will be running at is actually 500kHz because
+  // timers multiply their clock frequency by 2 if the APB prescaler is set to a value other than 1
   RCC->CFGR |= (0b111 << 8);
 
   // Enable TIM6 clock
@@ -32,6 +33,9 @@ void configure_clocks(void) {
 void configure_timers(void) {
   // Set ARPE = 0 (don't buffer auto-reload register)
   TIM6->CR1 &= ~(1 << 7);
+  // Set PSC = 1
+  // This divides the clock frequency by 2 to get 250kHz
+  TIM6->PSC = 1;
   // Set CEN = 1 (enable counter)
   TIM6->CR1 |= (1 << 0);
 
@@ -39,8 +43,9 @@ void configure_timers(void) {
   TIM7->CR1 &= ~(1 << 7);
   // Set OPM = 1 (making it a one-shot timer)
   TIM7->CR1 |= (1 << 3);
-  // Set PSC = 3 (divide clock frequency by 4, for 62.5kHz)
-  TIM7->PSC = 3;
+  // Set PSC = 7
+  // This divides the clock frequency by 8 to get 62.5kHz
+  TIM7->PSC = 7;
 }
 
 void configure_GPIO(void) {

@@ -1,5 +1,4 @@
 #pragma once
-
 #include <stdint.h>
 
 const uint16_t SONG_NOTES[][2] = {
