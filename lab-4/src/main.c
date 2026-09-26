@@ -43,9 +43,9 @@ void configure_timers(void) {
   TIM7->CR1 &= ~(1 << 7);
   // Set OPM = 1 (making it a one-shot timer)
   TIM7->CR1 |= (1 << 3);
-  // Set PSC = 7
-  // This divides the clock frequency by 8 to get 62.5kHz
-  TIM7->PSC = 7;
+  // Set PSC = 31
+  // This divides the clock frequency by 32 to get 15.625kHz
+  TIM7->PSC = 31;
 }
 
 void configure_GPIO(void) {
@@ -62,7 +62,7 @@ void configure_GPIO(void) {
 // Utils for playing music
 //
 const uint32_t PITCH_TIMER_BASE_FREQ = 250000;
-const uint32_t DURATION_TIMER_BASE_FREQ = 62500;
+const uint32_t DURATION_TIMER_BASE_FREQ = 15625;
 
 uint16_t freq_to_max_count(uint16_t freq) {
   return (uint16_t) (PITCH_TIMER_BASE_FREQ / freq);
