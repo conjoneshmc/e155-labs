@@ -1,3 +1,5 @@
+#include "reg.h"
+
 const int notes[][2] = {
   {659,	125},
   {623,	125},
@@ -111,5 +113,24 @@ const int notes[][2] = {
 };
 
 int main(void) {
+  // Enable GPIOB clock
+  *RCC_AHB2ENR |= (1 << 1);
 
+  // Set MODE3[1:0] = 01 (gpio is an output)
+  GPIOB->MODER &= ~(1 << 7);
+  GPIOB->MODER |= (1 << 6);
+  // Set OT3 = 0 (push-pull)
+  GPIOB->OTYPER &= ~(1 << 3);
+  // Set OSPEED3[1:0] = 01 (medium speed)
+  GPIOB->OSPEEDR &= ~(1 << 7);
+  GPIOB->OSPEEDR |= (1 << 6);
+  // Set PUPD3[1:0] = 00 (no push-up or pull-down)
+  GPIOB->PUPDR &= ~(1 << 7);
+  GPIOB->PUPDR &= ~(1 << 6);
+
+  // Write PB3 high (on-board LED)
+  while (1) {
+    for (volatile int i = 0; i < 50000; i++);
+    GPIOB->ODR ^= (1 << 3);
+  }
 }
