@@ -5,6 +5,13 @@
 // Peripheral configuration
 //
 void configure_clocks(void) {
+  // Set MSIPLLEN = 1 (enable frequency compensation)
+  *((uint32_t*) (0x40007000UL)) |= (1 << 8);
+  RCC->BDCR |= (1 << 0);
+  while (((RCC->BDCR & (1 << 1)) >> 1) == 0);
+  RCC->CR |= (1 << 2);
+  *((uint32_t*) (0x40007000UL)) &= ~(1 << 8);
+
   // Set MSIRANGE[3:0] = 0110 (set MSI clock frequency to 4MHz)
   RCC->CR &= ~(0b1111 << 4);
   RCC->CR |=  (0b0110 << 4);
@@ -65,11 +72,11 @@ const uint32_t PITCH_TIMER_BASE_FREQ = 250000;
 const uint32_t DURATION_TIMER_BASE_FREQ = 15625;
 
 uint16_t freq_to_max_count(uint16_t freq) {
-  return (uint16_t) (PITCH_TIMER_BASE_FREQ / freq);
+  return (uint16_t) (PITCH_TIMER_BASE_FREQ / freq - 1);
 }
 
 uint16_t duration_to_max_count(uint16_t duration) {
-  return (uint16_t) ((DURATION_TIMER_BASE_FREQ * duration) / 1000);
+  return (uint16_t) ((DURATION_TIMER_BASE_FREQ * duration) / 1000 - 1);
 }
 
 void set_speaker_freq(uint16_t freq) {
@@ -162,7 +169,9 @@ int main(void) {
 
       note_index++;
       if (is_song_done(note_index)) {
-        note_index = 0;
+        // note_index = 0;
+        silence_speaker();
+        break;
       }
       play_note(note_index);
     }

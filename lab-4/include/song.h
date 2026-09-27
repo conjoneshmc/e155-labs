@@ -59,8 +59,9 @@
 // Song library
 //
 // 0 = Hungarian dance
-// 1 = Fur elise
-#define SONG_SELECT 1
+// 1 = Oh Canada!
+// 2 = Fur elise
+#define SONG_SELECT 0
 
 #if SONG_SELECT == 0
 
