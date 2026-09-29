@@ -61,7 +61,7 @@
 // 0 = Hungarian dance
 // 1 = Oh Canada!
 // 2 = Fur elise
-#define SONG_SELECT 1
+#define SONG_SELECT 2
 
 #if SONG_SELECT == 0
 
