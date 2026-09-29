@@ -90,7 +90,7 @@ void drive_speaker(void) {
   volatile uint16_t freq_count = TIM6->CNT;
   volatile uint16_t max_freq_count = TIM6->ARR;
 
-  if (freq_count >= max_freq_count / 2) {
+  if (freq_count >= (max_freq_count + 1) / 2) {
     // Drive speaker pin high
     GPIOA->ODR |=  (1 << 5);
   } else {
