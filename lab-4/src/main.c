@@ -6,6 +6,7 @@
 //
 void configure_clocks(void) {
   // Set MSIPLLEN = 1 (enable frequency compensation)
+  RCC->APB1ENR1 |= (1 << 28);
   *((uint32_t*) (0x40007000UL)) |= (1 << 8);
   RCC->BDCR |= (1 << 0);
   while (((RCC->BDCR & (1 << 1)) >> 1) == 0);
