@@ -1,0 +1,396 @@
+#pragma once
+#include <stdint.h>
+
+
+//
+// Song playback constants
+//
+// Note pitches
+#define NOTE_REST  0
+#define NOTE_G3  196
+#define NOTE_Gs3 208
+#define NOTE_Ab3 208
+#define NOTE_A3  220
+#define NOTE_As3 233
+#define NOTE_Bb3 233
+#define NOTE_B3  247
+#define NOTE_C4  262
+#define NOTE_Cs4 277
+#define NOTE_Db4 277
+#define NOTE_D4  294
+#define NOTE_Ds4 311
+#define NOTE_Eb4 311
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_Fs4 370
+#define NOTE_Gb4 370
+#define NOTE_G4  392
+#define NOTE_Gs4 415
+#define NOTE_Ab4 415
+#define NOTE_A4  440
+#define NOTE_As4 466
+#define NOTE_Bb4 466
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_Cs5 554
+#define NOTE_Db5 554
+#define NOTE_D5  587
+#define NOTE_Ds5 622
+#define NOTE_Eb5 622
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_Fs5 741
+#define NOTE_Gb5 741
+#define NOTE_G5  784
+#define NOTE_Gs5 831
+#define NOTE_Ab5 831
+#define NOTE_A5  880
+
+// Note durations
+// Assuming a tempo of quarter = 120bpm
+#define LENGTH_WHOLE    2000
+#define LENGTH_HALF     1000
+#define LENGTH_QUARTER   500
+#define LENGTH_EIGHTH    250
+#define LENGTH_SIXTEENTH 125
+
+
+//
+// Song library
+//
+// 0 = Hungarian dance
+// 1 = Oh Canada!
+// 2 = Fur elise
+#define SONG_SELECT 2
+
+#if SONG_SELECT == 0
+
+// Hungarian dance
+// Key: G minor
+// Time: 2/4
+const uint16_t SONG_NOTES[][2] = {
+  {NOTE_D4,   LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_G4,   LENGTH_EIGHTH},
+
+  {NOTE_Bb4,  LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_G4,   LENGTH_EIGHTH},
+
+  {NOTE_Fs4,  LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_EIGHTH},
+  {NOTE_Fs4,  LENGTH_SIXTEENTH},
+  {NOTE_A4,   LENGTH_SIXTEENTH},
+
+  {NOTE_G4,   LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_QUARTER},
+
+  {NOTE_Eb4,  LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_EIGHTH},
+  {NOTE_F4,   LENGTH_SIXTEENTH},
+  {NOTE_G4,   LENGTH_SIXTEENTH},
+
+  {NOTE_D4,   LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_QUARTER},
+
+  {NOTE_C4,   LENGTH_SIXTEENTH},
+  {NOTE_Bb3,  LENGTH_SIXTEENTH - 25}, {NOTE_REST, 25},
+  {NOTE_Bb3,  LENGTH_SIXTEENTH},
+  {NOTE_A3,   LENGTH_SIXTEENTH - 25}, {NOTE_REST, 25},
+  {NOTE_A3,   LENGTH_EIGHTH + LENGTH_SIXTEENTH},
+  {NOTE_D4,   LENGTH_SIXTEENTH},
+
+  {NOTE_G3,   LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_QUARTER},
+
+  {NOTE_D4,   LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_G4,   LENGTH_SIXTEENTH},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH},
+
+  {NOTE_D5,   LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_Bb4,  LENGTH_EIGHTH},
+
+  {NOTE_A4,   LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH},
+  {NOTE_C5,   LENGTH_SIXTEENTH},
+
+  {NOTE_Bb4,  LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_QUARTER},
+
+  {NOTE_Eb5,  LENGTH_SIXTEENTH},
+  {NOTE_F5,   LENGTH_SIXTEENTH},
+  {NOTE_G5,   LENGTH_SIXTEENTH},
+  {NOTE_Eb5,  LENGTH_SIXTEENTH},
+  {NOTE_D5,   LENGTH_SIXTEENTH},
+  {NOTE_Eb5,  LENGTH_SIXTEENTH},
+  {NOTE_F5,   LENGTH_SIXTEENTH},
+  {NOTE_D5,   LENGTH_SIXTEENTH},
+
+  {NOTE_C5,   LENGTH_SIXTEENTH},
+  {NOTE_D5,   LENGTH_SIXTEENTH},
+  {NOTE_Eb5,  LENGTH_SIXTEENTH},
+  {NOTE_C5,   LENGTH_SIXTEENTH},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH},
+  {NOTE_C5,   LENGTH_SIXTEENTH},
+  {NOTE_D5,   LENGTH_SIXTEENTH},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH},
+
+  {NOTE_C5,   LENGTH_SIXTEENTH},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH - 25}, {NOTE_REST, 25},
+  {NOTE_Bb4,  LENGTH_SIXTEENTH},
+  {NOTE_A4,   LENGTH_SIXTEENTH - 25}, {NOTE_REST, 25},
+  {NOTE_A4,   LENGTH_EIGHTH + LENGTH_SIXTEENTH},
+  {NOTE_D5,   LENGTH_SIXTEENTH},
+
+  {NOTE_G4,   LENGTH_HALF},
+
+  {0, 0}
+};
+
+#elif SONG_SELECT == 1
+
+// Oh Canada!
+// Key: E major
+// Time: 4/4
+const uint16_t SONG_NOTES[][2] = {
+  {NOTE_Gs4,   LENGTH_HALF},
+  {NOTE_B4,  LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_B4,  LENGTH_EIGHTH},
+
+  {NOTE_E4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_QUARTER},
+  {NOTE_Fs4,  LENGTH_QUARTER},
+
+  {NOTE_Gs4,   LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_QUARTER},
+  {NOTE_B4,  LENGTH_QUARTER},
+  {NOTE_Cs5,   LENGTH_QUARTER},
+
+  {NOTE_Fs4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_HALF},
+
+  {NOTE_Gs4,   LENGTH_HALF},
+  {NOTE_As4,   LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_As4,   LENGTH_EIGHTH},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_QUARTER},
+  {NOTE_Cs5,   LENGTH_QUARTER},
+
+  {NOTE_Ds5,   LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+  {NOTE_Ds5,   LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+  {NOTE_Cs5,   LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+  {NOTE_Cs5,   LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_QUARTER},
+  {NOTE_Fs4,  LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+
+  {NOTE_A4,  LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+  {NOTE_Fs4,  LENGTH_QUARTER},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+  {NOTE_A4,  LENGTH_EIGHTH},
+
+  {NOTE_B4,  LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_A4,  LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_EIGHTH},
+  {NOTE_B4,  LENGTH_EIGHTH},
+
+  {NOTE_Cs5,   LENGTH_QUARTER},
+  {NOTE_B4,  LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_QUARTER},
+  {NOTE_Gs4,   LENGTH_QUARTER},
+
+  {NOTE_Fs4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_QUARTER},
+  {NOTE_Fs4,  LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+
+  {NOTE_A4,  LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+  {NOTE_Fs4,  LENGTH_QUARTER},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+  {NOTE_A4,  LENGTH_EIGHTH},
+
+  {NOTE_B4,  LENGTH_QUARTER + LENGTH_EIGHTH},
+  {NOTE_A4,  LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+  {NOTE_Gs4,   LENGTH_QUARTER},
+
+  {NOTE_Fs4,  LENGTH_QUARTER},
+  {NOTE_B4,  LENGTH_QUARTER - 25}, {NOTE_REST, 25},
+  {NOTE_B4,  LENGTH_EIGHTH},
+  {NOTE_As4,   LENGTH_EIGHTH},
+  {NOTE_Gs4,   LENGTH_EIGHTH},
+  {NOTE_As4,   LENGTH_EIGHTH},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_QUARTER},
+
+  {NOTE_Gs4,   LENGTH_HALF},
+  {NOTE_B4,  LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_B4,  LENGTH_EIGHTH},
+
+  {NOTE_E4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_HALF},
+
+  {NOTE_A4,  LENGTH_HALF},
+  {NOTE_Cs5,   LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_Cs5,   LENGTH_EIGHTH},
+
+  {NOTE_Fs4,  LENGTH_HALF},
+  {NOTE_REST, LENGTH_HALF},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_C5,   LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_C5,   LENGTH_EIGHTH},
+
+  {NOTE_Cs5,   LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_QUARTER},
+  {NOTE_Gs4,   LENGTH_QUARTER},
+  {NOTE_Fs4,  LENGTH_QUARTER},
+
+  {NOTE_E4,  LENGTH_HALF},
+  {NOTE_Fs4,  LENGTH_HALF},
+
+  {NOTE_Gs4,   LENGTH_HALF},
+  {NOTE_REST, LENGTH_HALF},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_E5,  LENGTH_QUARTER + LENGTH_EIGHTH - 25}, {NOTE_REST, 25},
+  {NOTE_E5,  LENGTH_EIGHTH},
+
+  {NOTE_Cs5,   LENGTH_QUARTER},
+  {NOTE_A4,  LENGTH_QUARTER},
+  {NOTE_Gs4,   LENGTH_QUARTER},
+  {NOTE_Fs4,  LENGTH_QUARTER},
+
+  {NOTE_B4,  LENGTH_HALF},
+  {NOTE_Ds5,   LENGTH_HALF},
+
+  {NOTE_E5,  LENGTH_HALF + LENGTH_QUARTER},
+  {NOTE_REST, LENGTH_QUARTER},
+
+  {0, 0}
+};
+
+#else
+
+// Fur elise
+// Key: A minor
+// Time: 3/8
+const uint16_t SONG_NOTES[][2] = {
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 494,	125},
+  { 587,	125},
+  { 523,	125},
+  { 440,	250},
+  {   0,	125},
+  { 262,	125},
+  { 330,	125},
+  { 440,	125},
+  { 494,	250},
+  {   0,	125},
+  { 330,	125},
+  { 416,	125},
+  { 494,	125},
+  { 523,	250},
+  {   0,	125},
+  { 330,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 494,	125},
+  { 587,	125},
+  { 523,	125},
+  { 440,	250},
+  {   0,	125},
+  { 262,	125},
+  { 330,	125},
+  { 440,	125},
+  { 494,	250},
+  {   0,	125},
+  { 330,	125},
+  { 523,	125},
+  { 494,	125},
+  { 440,	250},
+  {   0,	125},
+  { 494,	125},
+  { 523,	125},
+  { 587,	125},
+  { 659,	375},
+  { 392,	125},
+  { 699,	125},
+  { 659,	125},
+  { 587,	375},
+  { 349,	125},
+  { 659,	125},
+  { 587,	125},
+  { 523,	375},
+  { 330,	125},
+  { 587,	125},
+  { 523,	125},
+  { 494,	250},
+  {   0,	125},
+  { 330,	125},
+  { 659,	125},
+  {   0,	250},
+  { 659,	125},
+  {1319,	125},
+  {   0,	250},
+  { 623,	125},
+  { 659,	125},
+  {   0,	250},
+  { 623,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 494,	125},
+  { 587,	125},
+  { 523,	125},
+  { 440,	250},
+  {   0,	125},
+  { 262,	125},
+  { 330,	125},
+  { 440,	125},
+  { 494,	250},
+  {   0,	125},
+  { 330,	125},
+  { 416,	125},
+  { 494,	125},
+  { 523,	250},
+  {   0,	125},
+  { 330,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 623,	125},
+  { 659,	125},
+  { 494,	125},
+  { 587,	125},
+  { 523,	125},
+  { 440,	250},
+  {   0,	125},
+  { 262,	125},
+  { 330,	125},
+  { 440,	125},
+  { 494,	250},
+  {   0,	125},
+  { 330,	125},
+  { 523,	125},
+  { 494,	125},
+  { 440,	500},
+  {   0,	  0}
+};
+
+#endif
