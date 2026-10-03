@@ -4,11 +4,11 @@
 // This helps achieve greater accuracy in the system clock
 void enable_MSI_freq_compensation(void) {
   set_bit(&RCC->APB1ENR1, 28);                // Set PWREN
-  set_bit((volatile uint32_t*) PWR_CR1, 8);   // Set DBP, enabling write access to RCC_BDCR
+  set_bit((uint32_t*) PWR_CR1, 8);   // Set DBP, enabling write access to RCC_BDCR
   set_bit(&RCC->BDCR, 0);                     // Set LSEON, enabling low-frequency oscillator
   wait_for_bit(&RCC->BDCR, 1, 1);             // Wait for LSERDY to go high
   set_bit(&RCC->CR, 2);                       // Set MSIPLLEN, enabling clock frquency compensation
-  clear_bit((volatile uint32_t*) PWR_CR1, 8); // Clear DBP, protecting write access to RCC_BDCR
+  clear_bit((uint32_t*) PWR_CR1, 8); // Clear DBP, protecting write access to RCC_BDCR
 }
 
 // Enable and configure the MSI clock to run at 4 MHz
@@ -39,5 +39,5 @@ void configure_interrupts(void) {
   set_bit(&EXTI->IMR1, 6);                       // Set IM6, unmasking external interrupt line 6
   set_bit(&EXTI->RTSR1, 6);                      // Set RT6, making EXTI6 listen for rising edges
   set_bit(&EXTI->FTSR1, 6);                      // Set FT6, making EXTI6 listen for falling edges
-  set_bit((volatile uint32_t*) NVIC_ISER0, 23);  // Enable IRQ 23 in the NVIC, which corresponds to EXT9_5
+  set_bit((uint32_t*) NVIC_ISER0, 23);  // Enable IRQ 23 in the NVIC, which corresponds to EXT9_5
 }
