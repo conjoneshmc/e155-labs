@@ -45,7 +45,7 @@ void EXTI0_IRQHandler(void) { // PB0 interrupt handler (encoder B)
 #define ZERO_VELOCITY_PULSE_TIMEOUT (TIMER_FREQ_HZ * 10) / 1000
 #define REFRESH_VELOCITY_TIMEOUT (TIMER_FREQ_HZ * 50) / 1000
 #define PULSES_PER_ROTATION 120
-#define PULSE_TO_DELAY_RATIO 4.2
+#define PULSE_TO_DELAY_RATIO 4.366
 
 // Application entry point
 int main(void) {
