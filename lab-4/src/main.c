@@ -60,7 +60,7 @@ void configure_GPIO(void) {
   // Set MODE5[1:0] = 10 (general-purpose output mode)
   GPIOA->MODER &= ~(0b11 << 10);
   GPIOA->MODER |=  (0b01 << 10);
-  // Set OSPEED3[1:0] = 01 (medium speed)
+  // Set OSPEED5[1:0] = 01 (medium speed)
   GPIOA->OSPEEDR &= ~(0b11 << 10);
   GPIOA->OSPEEDR |=  (0b01 << 10);
 }
