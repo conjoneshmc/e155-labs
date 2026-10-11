@@ -7,4 +7,4 @@
 void send_char(char data);
 void send_str(char* data);
 char read_char(void);
-void read_str(char* out);
+void read_str(char* out, uint32_t max_len);

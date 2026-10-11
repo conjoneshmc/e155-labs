@@ -1,5 +1,11 @@
 #include "periph.h"
 
+// No idea what this is for, but it was in the starter code
+void configure_flash(void) {
+  FLASH->ACR |= FLASH_ACR_LATENCY_4WS;
+  FLASH->ACR |= FLASH_ACR_PRFTEN;
+}
+
 // Enable the PLL part of the MSI clock, allowing it to compensation for any errors in frequency
 // This helps achieve greater accuracy in the system clock
 void enable_MSI_freq_compensation(void) {
@@ -38,6 +44,10 @@ void configure_GPIO(void) {
   GPIOA->AFR[1] &= ~(GPIO_AFRH_AFSEL9 | GPIO_AFRH_AFSEL10); // :
   GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL9, 0b0111);      // Configure PA9 as AF7 (USART1_TX)
   GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL10, 0b0111);     // Configure PA10 as AF7 (USART1_RX)
+
+  RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;              // Enable GPIOB clock domain
+  GPIOB->MODER &= ~GPIO_MODER_MODE3;                // :
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE3, 0b01); // Configure PB3 in output mode
 }
 
 // Configure USART1 peripheral
@@ -49,6 +59,6 @@ void configure_USART(void) {
   USART1->CR1 &= ~USART_CR1_OVER8;                   // Set OVER8 = 0, so we oversample by 16 instead
   USART1->CR2 &= ~USART_CR2_STOP;                    // Set STOP = 00, which is 1 stop bit
   USART1->BRR = (uint16_t) 256;                      // Set BRR = 256, which divides the 32 MHz system clock to 125 kHz
-  USART1->CR1 |= USART_CR1_UE;                       // :
+  USART1->CR1 |= USART_CR1_UE;                       // Enable the peripheral
   USART1->CR1 |= USART_CR1_TE | USART_CR1_RE;        // Enable transmission and reception on the USART peripheral
 }
