@@ -4,4 +4,6 @@
 
 #include <stm32l432xx.h>
 
-char spi_send_recv(char data);
+void spi_begin(void);
+void spi_end(void);
+uint8_t spi_send_recv(uint8_t data);

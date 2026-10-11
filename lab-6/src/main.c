@@ -44,6 +44,11 @@ int main(void) {
   configure_USART();
   configure_SPI();
 
+  spi_begin();
+  spi_send_recv(0x80);       // Write to configuration register
+  spi_send_recv(0b11100100); // Enable continuous conversion mode
+  spi_end();
+
   while (true) {
     char request[64] = "";
     int char_index = 0;
@@ -53,8 +58,6 @@ int main(void) {
       request[char_index] = read_char();
       char_index++;
     }
-
-    // TODO: ADD SPI CODE FOR READING TEMPERATURE
 
     // Update LED status based on request
     if (str_contains(request, "ledon")) {
@@ -67,13 +70,32 @@ int main(void) {
     send_str(webpage_start_str);
     send_str(webpage_led_str);
 
+    // Send LED status
     send_str("<h2>LED Status</h2>");
     if (get_led_state()) {
-      send_str("<p>The LED is <b>ON</b></p>");
+      send_str("<p>The LED is: <b>ON</b></p>");
     } else {
-      send_str("<p>The LED is <b>OFF</b></p>");
+      send_str("<p>The LED is: <b>OFF</b></p>");
     }
 
+    // Read temperature data from sensor
+    spi_begin();
+    spi_send_recv(0x01);
+    uint8_t temperature_lsb = spi_send_recv(0x00);
+    uint8_t temperature_msb = spi_send_recv(0x00);
+    spi_end();
+    
+    // Calculate and send temperature status
+    int16_t temperature_raw = (temperature_msb << 8) | temperature_lsb;
+    double temperature_celsius = 0.00390625 * temperature_raw;
+
+    char temperature_status_str[256] = "";
+    snprintf(temperature_status_str, sizeof(temperature_status_str),
+      "<p>Current temperature is: <b>%.3f C</b></p>", temperature_celsius);
+    send_str("<h2>Temperature Sensor</h2>");
+    send_str(temperature_status_str);
+
+    // Finish the webpage
     send_str(webpage_end_str);
   }
 }

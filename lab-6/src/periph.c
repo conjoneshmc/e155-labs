@@ -36,6 +36,14 @@ void configure_timers(void) {
 }
 
 // Configure necessary GPIO ports as inputs
+// We are using:
+// PA9 as USART1_TX
+// PA10 as USART1_RX
+// PB3 as SPI1_SCK
+// PB4 as SPI1_MISO
+// PB5 as SPI1_MOSI
+// PB6 as SPI1_CE
+// PB0 as output LED
 void configure_GPIO(void) {
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;                      // Enable GPIOA clock domain
   GPIOA->MODER &= ~(GPIO_MODER_MODE9 | GPIO_MODER_MODE10);  // :
@@ -58,9 +66,9 @@ void configure_GPIO(void) {
   GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL4, 0b0101);      // Configure PB4 as AF5 (SPI1_MISO)
   GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 0b0101);      // Configure PB5 as AF5 (SPI1_MOSI)
   GPIOB->MODER &= ~GPIO_MODER_MODE0;                        // :
-  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE0, 0b01);         // Configure PB0 in output mode
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE0, 0b01);         // Configure PB0 in output mode (output LED)
   GPIOB->MODER &= ~GPIO_MODER_MODE6;                        // :
-  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE6, 0b01);         // Configure PB6 in output mode
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE6, 0b01);         // Configure PB6 in output mode (SPI1_CE)
   
 }
 
@@ -90,4 +98,5 @@ void configure_SPI(void) {
   SPI1->CR2 &= ~SPI_CR2_SSOE;                        // Set SSOE = 0, disabling the NSS pin
   SPI1->CR2 |= SPI_CR2_FRXTH;                        // Lecture slides told me to enable this
   SPI1->CR1 |= SPI_CR1_SPE;                          // Enable the peripheral
+  GPIOB->ODR &= ~GPIO_ODR_OD6;                       // Drive CE low
 }
