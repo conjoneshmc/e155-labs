@@ -45,9 +45,23 @@ void configure_GPIO(void) {
   GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL9, 0b0111);      // Configure PA9 as AF7 (USART1_TX)
   GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL10, 0b0111);     // Configure PA10 as AF7 (USART1_RX)
 
-  RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;              // Enable GPIOB clock domain
-  GPIOB->MODER &= ~GPIO_MODER_MODE3;                // :
-  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE3, 0b01); // Configure PB3 in output mode
+  RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;                      // Enable GPIOB clock domain
+  GPIOB->MODER &= ~(GPIO_MODER_MODE3 | GPIO_MODER_MODE4
+    | GPIO_MODER_MODE5 | GPIO_MODER_MODE6);                 // :
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE3, 0b10);         // Configure PB3 in alternate function mode
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE4, 0b10);         // Configure PB4 in alternate function mode
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE5, 0b10);         // Configure PB5 in alternate function mode
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE6, 0b01);         // Configure PB5 in output mode
+  GPIOB->AFR[0] &= ~(GPIO_AFRL_AFSEL3 | GPIO_AFRL_AFSEL4
+    | GPIO_AFRL_AFSEL5);                                    // :
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL3, 0b0101);      // Configure PB3 as AF5 (SPI1_SCK)
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL4, 0b0101);      // Configure PB4 as AF5 (SPI1_MISO)
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 0b0101);      // Configure PB5 as AF5 (SPI1_MOSI)
+  GPIOB->MODER &= ~GPIO_MODER_MODE0;                        // :
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE0, 0b01);         // Configure PB0 in output mode
+  GPIOB->MODER &= ~GPIO_MODER_MODE6;                        // :
+  GPIOB->MODER |= _VAL2FLD(GPIO_MODER_MODE6, 0b01);         // Configure PB6 in output mode
+  
 }
 
 // Configure USART1 peripheral
@@ -61,4 +75,19 @@ void configure_USART(void) {
   USART1->BRR = (uint16_t) 256;                      // Set BRR = 256, which divides the 32 MHz system clock to 125 kHz
   USART1->CR1 |= USART_CR1_UE;                       // Enable the peripheral
   USART1->CR1 |= USART_CR1_TE | USART_CR1_RE;        // Enable transmission and reception on the USART peripheral
+}
+
+// Configure SPI peripheral
+void configure_SPI(void) {
+  RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;                // Enable SPI1 clock domain
+  SPI1->CR1 &= ~SPI_CR1_BR;                          // :
+  SPI1->CR1 |= _VAL2FLD(SPI_CR1_BR, 0b101);          // Set BR = 101, dividing input clock by 64
+  SPI1->CR1 |= SPI_CR1_CPHA;                         // Set CPHA = 1
+  SPI1->CR1 |= SPI_CR1_CPOL;                         // Set CPOL = 1
+  SPI1->CR1 |= SPI_CR1_SSM;                          // Set SSM = 1, disabling hardware management of NSS
+  SPI1->CR1 |= SPI_CR1_SSI;                          // Set SSI = 1, so SPI doesn't go into a master mode fault state
+  SPI1->CR1 |= SPI_CR1_MSTR;                         // Select master mode
+  SPI1->CR2 &= ~SPI_CR2_SSOE;                        // Set SSOE = 0, disabling the NSS pin
+  SPI1->CR2 |= SPI_CR2_FRXTH;                        // Lecture slides told me to enable this
+  SPI1->CR1 |= SPI_CR1_SPE;                          // Enable the peripheral
 }

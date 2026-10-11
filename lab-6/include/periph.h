@@ -8,5 +8,6 @@ void configure_flash(void);
 void enable_MSI_freq_compensation(void);
 void configure_system_clock(void);
 void configure_timers(void);
-void configure_USART(void);
 void configure_GPIO(void);
+void configure_USART(void);
+void configure_SPI(void);

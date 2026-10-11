@@ -20,14 +20,14 @@ int str_contains(char* str, char* sequence) {
 // Functions to get and set the output LED state
 void set_led_state(int on) {
   if (on) {
-    GPIOB->ODR |= GPIO_ODR_OD3;
+    GPIOB->ODR |= GPIO_ODR_OD0;
   } else {
-    GPIOB->ODR &= ~GPIO_ODR_OD3;
+    GPIOB->ODR &= ~GPIO_ODR_OD0;
   }
 }
 
 int get_led_state(void) {
-  if (_FLD2VAL(GPIO_ODR_OD3, GPIOB->ODR)) {
+  if (_FLD2VAL(GPIO_ODR_OD0, GPIOB->ODR)) {
     return 1;
   } else {
     return 0;
@@ -42,7 +42,7 @@ int main(void) {
   configure_timers();
   configure_GPIO();
   configure_USART();
-  // TODO: ADD SPI INITIALIZATION CODE
+  configure_SPI();
 
   while (true) {
     char request[64] = "";

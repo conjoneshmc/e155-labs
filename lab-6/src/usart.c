@@ -10,7 +10,6 @@ void send_str(char* data) {
   for (uint32_t i = 0; data[i] != 0; i++) {
     send_char(data[i]);
   }
-  send_char(0);
 }
 
 char read_char(void) {
