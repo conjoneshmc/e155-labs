@@ -1,4 +1,4 @@
-module shiftrows(
+module shift_rows(
   input  logic [127:0] a,
   output logic [127:0] y
 );

@@ -1,19 +1,19 @@
 `timescale 10ns/1ns
 
 /////////////////////////////////////////////
-// shiftrows_tb
+// shift_rows_tb
 //   Self-checking testbench for shiftrows
 //   On a mismatch it prints the state as a 4x4 grid, laid out like the
 //   figures in FIPS-197, and marks each wrong byte with a *. The shape of
 //   the error (one byte? a whole row? a whole column?) tells you where to look.
 /////////////////////////////////////////////
 
-module shiftrows_tb();
+module shift_rows_tb();
     logic [127:0] a, y;
     integer       tests, errors;
 
     // device under test
-    shiftrows dut(.a, .y);
+    shift_rows dut(.a, .y);
 
     // byte at row r, column c of a packed state (see the packing in shiftrows.sv)
     function logic [7:0] state_byte(input logic [127:0] s, input integer r, input integer c);
