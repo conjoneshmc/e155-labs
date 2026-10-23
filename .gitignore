@@ -6,6 +6,9 @@
 .recovery
 .spread_sheet.ini
 .spreadsheet_view.ini
+.ng_run_manager.ini
+.setting.ini
+**/work/
 *.dir/
 *.log
 *.tcl
@@ -18,9 +21,6 @@
 *.wlf
 transcript
 ._Real_._Math_.vhd
-**/work/
-
-# apio files
 _build
 
 # Segger Embedded Studio
