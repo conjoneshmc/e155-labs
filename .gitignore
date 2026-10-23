@@ -13,8 +13,12 @@
 *.srp
 *.dmp
 *.gtkw
+*.mti
+*.mpf
+*.wlf
+transcript
 ._Real_._Math_.vhd
-**/testbenches/work/
+**/work/
 
 # apio files
 _build
