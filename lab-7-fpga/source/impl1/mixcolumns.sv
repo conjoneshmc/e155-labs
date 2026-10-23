@@ -7,6 +7,7 @@ module mixcolumns(input  logic [127:0] a,
   mixcolumn mc3(a[31:0],   y[31:0]);
 endmodule
 
+
 module mixcolumn(input  logic [31:0] a,
                  output logic [31:0] y);
                       
@@ -26,6 +27,7 @@ module mixcolumn(input  logic [31:0] a,
         assign y3 = a3 ^ tmp ^ t3;
         assign y = {y0, y1, y2, y3};    
 endmodule
+
 
 module galoismult(input  logic [7:0] a,
                   output logic [7:0] y);

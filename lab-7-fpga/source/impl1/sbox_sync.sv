@@ -1,6 +1,6 @@
 module sbox_sync(
-	input		logic [7:0] a,
 	input	 	logic 			clk,
+	input		logic [7:0] a,
 	output 	logic [7:0] y);
             
   // sbox implemented as a ROM
