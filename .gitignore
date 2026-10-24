@@ -7,6 +7,8 @@
 .spread_sheet.ini
 .spreadsheet_view.ini
 .ng_run_manager.ini
+.floorplanner.ini
+.promote.pfl
 .setting.ini
 **/work/
 *.dir/
