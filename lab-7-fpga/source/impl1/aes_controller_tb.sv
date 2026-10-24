@@ -4,23 +4,21 @@ module aes_controller_tb();
   logic clk;
   logic load;
   logic done;
-  logic load_inputs;
-  logic load_cipher_state;
-  logic cipher_state_sel;
+  logic state_update;
+  logic state_select;
+  logic [31:0] round_const;
   logic only_add_round_key;
   logic skip_mix_columns;
-  logic [3:0] round_num;
 
   aes_controller dut(
     .clk,
     .load,
     .done,
-    .load_inputs,
-    .load_cipher_state,
-    .cipher_state_sel,
+    .state_update,
+    .state_select,
+    .round_const,
     .only_add_round_key,
-    .skip_mix_columns,
-    .round_num
+    .skip_mix_columns
   );
 
   always #5 clk = ~clk;
