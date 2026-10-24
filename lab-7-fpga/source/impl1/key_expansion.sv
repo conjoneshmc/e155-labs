@@ -82,6 +82,7 @@ module key_expansion(
 endmodule
 
 
+/*
 module rot_word(
   input  logic [31:0] a,
   output logic [31:0] y
@@ -103,3 +104,4 @@ module sub_word(
   sbox_sync sub_a2(.clk, .a(a[15:8]),  .y(y[15:8]));
   sbox_sync sub_a3(.clk, .a(a[7:0]),   .y(y[7:0]));
 endmodule
+*/
