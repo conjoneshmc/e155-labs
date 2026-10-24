@@ -3,7 +3,6 @@ module aes_controller(
   input  logic load,
   output logic done,
   output logic load_inputs,
-  output logic load_words,
   output logic load_cipher_state,
   output logic cipher_state_sel,
   output logic only_add_round_key,
@@ -59,9 +58,6 @@ module aes_controller(
     done = (state == DONE);
 
     // load_inputs is driven by the falling edge detector
-
-    // Tells the datapath to clock the output of the key_expansion module after it's done
-    load_words = (state == KEY_EXPANSION) && (cycle_latency == 0);
 
     // Tells the datapath to update the state vector after key expansion and after each round is done
     // Each round takes 2 cycles of latency to complete, since sub_bytes is clocked to DRAM

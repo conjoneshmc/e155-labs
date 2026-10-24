@@ -5,7 +5,6 @@ module aes_controller_tb();
   logic load;
   logic done;
   logic load_inputs;
-  logic load_words;
   logic load_cipher_state;
   logic cipher_state_sel;
   logic only_add_round_key;
@@ -17,7 +16,6 @@ module aes_controller_tb();
     .load,
     .done,
     .load_inputs,
-    .load_words,
     .load_cipher_state,
     .cipher_state_sel,
     .only_add_round_key,
