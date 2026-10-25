@@ -19,7 +19,7 @@
 				<BScanVal>0</BScanVal>
 			</Bypass>
 			<File>../../impl1/lab7fpga_impl1.bin</File>
-			<FileTime>10/24/26 19:30:46</FileTime>
+			<FileTime>10/24/26 20:57:44</FileTime>
 			<JedecChecksum>0x9B73</JedecChecksum>
 			<MemoryType>External SPI Flash Memory (SPI FLASH)</MemoryType>
 			<Operation>Erase,Program,Verify</Operation>

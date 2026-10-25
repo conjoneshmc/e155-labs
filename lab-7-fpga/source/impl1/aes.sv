@@ -5,9 +5,9 @@ module aes(
   input  logic load,
   output logic done
 );
-  // Internal clock @ 24 MHz
+  // Internal clock @ 6 MHz
   logic clk;
-  HSOSC #(.CLKHF_DIV("0b01")) hf_osc(
+  HSOSC #(.CLKHF_DIV(2'b11)) hf_osc(
     .CLKHFPU(1'b1),
     .CLKHFEN(1'b1),
     .CLKHF(clk)

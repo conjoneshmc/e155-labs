@@ -54,9 +54,11 @@ module aes_controller(
     if (state == IDLE && start_cipher) begin
       state <= CIPHER;
       cycle_latency <= 1;
+      round_num <= 0;
     end
     else if (state == CIPHER) begin
-      if (cycle_latency == 0) begin
+      if (load) state <= IDLE;
+      else if (cycle_latency == 0) begin
         if (round_num >= 10) state <= DONE;
         else begin
           cycle_latency <= 1;
@@ -64,6 +66,9 @@ module aes_controller(
         end
       end
       else cycle_latency <= cycle_latency - 1;
+    end
+    else if (state == DONE && load) begin
+      state <= IDLE;
     end
   end
 

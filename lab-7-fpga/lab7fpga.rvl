@@ -1,0 +1,4 @@
+<Project Date="2026-10-24" ModBy="Inserter" Name="C:/Users/windy/Documents/Harvey Mudd College/ENGR155/e155-labs/lab-7-fpga/lab7fpga.rvl" SigType="0">
+    <IP Version="1_6_042617"/>
+    <Design DesignEntry="Schematic/Verilog HDL" DesignName="lab7fpga" DeviceFamily="iCE40UP" DeviceName="iCE40UP5K" JTAG="soft" Stage="presyn" Synthesis="lse"/>
+</Project>
