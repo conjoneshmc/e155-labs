@@ -15,7 +15,7 @@ module aes_spi_tb();
     logic delay;
     
     // device under test
-    aes dut(clk, sck, sdi, sdo, load, done);
+    aes dut(/*clk,*/ sck, sdi, sdo, load, done);
     
     // test case
     initial begin   
