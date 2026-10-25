@@ -6,10 +6,16 @@ module aes_controller(
   output logic done,
 
   /*
-  Whether the datapath should update its state (the ciphertext state vector and round key value) on the next clock cycle
+  Whether the datapath should update the cipher state on the next clock cycle
   Since some operations require multiple clock cycles to perform, we don't want to prematurely update the state while the operation is still ongoing
   */
-  output logic state_update,
+  output logic cipher_state_update,
+
+  /*
+  Whether the datapath should update the round key state on the next clock cycle
+  This needs to be separate from the cipher_state_update control signal because we don't update it after round 0
+  */
+  output logic key_state_update,
 
   /*
   When the datapath updates its state, indicates where the next state should come from
@@ -77,9 +83,10 @@ module aes_controller(
 
     1. We are waiting for the cipher to start and become notified that the data is ready. In this case we should load the plaintext and key inputs as the initial state in the datapath
     
-    2. During a round of AES when the clock cycle latency reaches 0. This indicates that the current round has finished computing the next state, so we should update it on the next clock cycle
+    2. During a round of AES when the clock cycle latency reaches 0. This indicates that the current round has finished computing the next state, so we should update it on the next clock cycle. Note that we don't update the key state after round 0, because the output of key_expansion_step already holds the round keys for the 1st round
     */
-    state_update = (state == IDLE && start_cipher) || (state == CIPHER && cycle_latency == 0);
+    cipher_state_update = (state == IDLE && start_cipher) || (state == CIPHER && cycle_latency == 0);
+    key_state_update = (state == IDLE && start_cipher) || (state == CIPHER && cycle_latency == 0 && round_num >= 1);
 
     // We only load external inputs into the state when starting the cipher
     state_select = (state == IDLE && start_cipher);
