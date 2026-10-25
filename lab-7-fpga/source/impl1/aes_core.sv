@@ -6,35 +6,32 @@ module aes_core(
   output logic         done, 
   output logic [127:0] cyphertext
 );
-  logic load_inputs;
-  logic load_cipher_state;
-  logic cipher_state_sel;
+  logic state_update;
+  logic state_select;
+  logic [31:0] round_const;
   logic only_add_round_key;
   logic skip_mix_columns;
-  logic [3:0] round_num;
 
   aes_controller controller(
     .clk,
     .load,
     .done,
-    .load_inputs,
-    .load_cipher_state,
-    .cipher_state_sel,
+    .state_update,
+    .state_select,
+    .round_const,
     .only_add_round_key,
-    .skip_mix_columns,
-    .round_num
+    .skip_mix_columns
   );
 
   aes_datapath datapath(
     .clk,
     .key,
     .plaintext,
-    .load_inputs,
-    .load_cipher_state,
-    .cipher_state_sel,
+    .state_update,
+    .state_select,
+    .round_const,
     .only_add_round_key,
     .skip_mix_columns,
-    .round_num,
-    .state(cyphertext)
+    .cipher_state(cyphertext)
   );
 endmodule
