@@ -4,8 +4,7 @@ module aes_controller_tb();
   logic clk;
   logic load;
   logic done;
-  logic cipher_state_update;
-  logic key_state_update;
+  logic state_update;
   logic state_select;
   logic [31:0] round_const;
   logic only_add_round_key;
@@ -15,8 +14,7 @@ module aes_controller_tb();
     .clk,
     .load,
     .done,
-    .cipher_state_update,
-    .key_state_update,
+    .state_update,
     .state_select,
     .round_const,
     .only_add_round_key,
