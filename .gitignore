@@ -1,12 +1,16 @@
 # Lattice Radiant files
 *.html
-impl*/
 *.xml
 .build_status
 .run_manager.ini
 .recovery
 .spread_sheet.ini
 .spreadsheet_view.ini
+.ng_run_manager.ini
+.floorplanner.ini
+.promote.pfl
+.setting.ini
+**/work/
 *.dir/
 *.log
 *.tcl
@@ -14,10 +18,11 @@ impl*/
 *.srp
 *.dmp
 *.gtkw
+*.mti
+*.mpf
+*.wlf
+transcript
 ._Real_._Math_.vhd
-**/testbenches/work/
-
-# apio files
 _build
 
 # Segger Embedded Studio
